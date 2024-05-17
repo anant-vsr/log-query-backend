@@ -7,12 +7,21 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors());
+
+
+//static files
+app.use(express.static(path.join(__dirname,'./Frontend/build')));
+
+app.get('*', function(req,res){
+  res.sendFile(path.join(__dirname,'./Frontend/build/index.html'));
+})
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URL, {
