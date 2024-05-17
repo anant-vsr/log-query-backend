@@ -17,10 +17,10 @@ app.use(cors());
 
 
 //static files
-app.use(express.static(path.join(__dirname,'./Frontend/build')));
+app.use(express.static(path.join(__dirname,'./client/build')));
 
 app.get('*', function(req,res){
-  res.sendFile(path.join(__dirname,'./Frontend/build/index.html'));
+  res.sendFile(path.join(__dirname,'./client/build/index.html'));
 })
 
 // MongoDB connection
