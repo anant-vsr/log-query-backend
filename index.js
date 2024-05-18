@@ -13,22 +13,20 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use(cors(
-  {
-      origin: ['https://logging-query-interface-deployed.onrender.com/'],
-      methods : ['POST','GET'],
-      credentials : true
-  }
+app.use(cors());
 
-));
+// app.use((req, res, next) => {
+//     // allow different IP address
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     // allow different header field 
+//     res.header('Access-Control-Allow-Headers', '*');
+//     res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS');
+
+//     next();
+// });
 
 
-//static files
-app.use(express.static(path.join(__dirname,'./client/build')));
 
-app.get('*', function(req,res){
-  res.sendFile(path.join(__dirname,'./client/build/index.html'));
-})
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URL, {
