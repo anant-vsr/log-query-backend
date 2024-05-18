@@ -15,15 +15,6 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
-// app.use((req, res, next) => {
-//     // allow different IP address
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     // allow different header field 
-//     res.header('Access-Control-Allow-Headers', '*');
-//     res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS');
-
-//     next();
-// });
 
 
 
@@ -121,22 +112,22 @@ app.post('/login', async (req, res) => {
 
 // Middleware to authenticate user
 // Middleware to authenticate user
-app.use((req, res, next) => {
-  const authHeader = req.headers.authorization;
+// const authenticateUser=async(req, res, next) => {
+//   const authHeader = req.headers.authorization;
 
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    const token = authHeader.substring(7); // Remove 'Bearer ' from the token string
-    jwt.verify(token, process.env.SECRET, (err, decoded) => {
-      if (err) {
-        return res.status(401).json({ error: 'Invalid token' });
-      }
-      req.user = decoded;
-      next();
-    });
-  } else {
-    res.status(401).json({ error: 'No token provided' });
-  }
-});
+//   if (authHeader && authHeader.startsWith('Bearer ')) {
+//     const token = authHeader.substring(7); // Remove 'Bearer ' from the token string
+//     jwt.verify(token, process.env.SECRET, (err, decoded) => {
+//       if (err) {
+//         return res.status(401).json({ error: 'Invalid token' });
+//       }
+//       req.user = decoded;
+//       next();
+//     });
+//   } else {
+//     res.status(401).json({ error: 'No token provided' });
+//   }
+// };
 
 
 // Log ingestion endpoint
