@@ -9,7 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/index.js.js",
+      "dest": "/index.js",
       "headers": {
         "Access-Control-Allow-Origin": "https://log-query-frontend.vercel.app",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",

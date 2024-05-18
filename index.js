@@ -13,19 +13,24 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use(cors());
-
-app.use((req, res, next) => {
-    // allow different IP address
-    res.setHeader('Access-Control-Allow-Origin', 'https://log-query-frontend.vercel.app');
-    // allow different header field 
-    res.header('Access-Control-Allow-Headers', '*');
-    res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS');
-
-    next();
-});
+//app.use(cors());
 
 
+const allowedOrigins = ['https://log-query-frontend.vercel.app', 'http://localhost:3000' ];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      var message = 'The CORS policy for this site does not ' +
+                    'allow access from the specified Origin.';
+      return callback(new Error(message), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}));
 
 
 
