@@ -15,6 +15,16 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use((req, res, next) => {
+    // allow different IP address
+    res.setHeader('Access-Control-Allow-Origin', 'https://log-query-frontend.vercel.app');
+    // allow different header field 
+    res.header('Access-Control-Allow-Headers', '*');
+    res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS');
+
+    next();
+});
+
 
 
 
